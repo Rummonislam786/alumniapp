@@ -1,0 +1,22 @@
+{
+  "name": "my-monorepository",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=@monorepo/api",
+    "dev:client": "npm run dev --workspace=@monorepo/client",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
+    "build": "npm run build --workspaces",
+    "build:api": "npm run build --workspace=@monorepo/api",
+    "build:client": "npm run build --workspace=@monorepo/client",
+    "test": "npm run test --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  }
+}
