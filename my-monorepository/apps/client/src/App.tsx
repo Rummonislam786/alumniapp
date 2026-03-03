@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
-import { User } from "@monorepo/types";
+import { users, 
+  // alumni
+ } from "@monorepo/types";
 import { userApi } from "./services/api";
 import { TaskList } from "./components/TaskList";
 import { CreateTaskForm } from "./components/CreateTaskForm";
 import "./App.css";
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<users[]>([]);
+  // const [alumni, setAlumni] = useState<alumni[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const [refreshTasks, setRefreshTasks] = useState(0);
 
   useEffect(() => {
     loadUsers();
+    // loadAlumni();
   }, []);
 
+  // const loadAlumni = async () => {
+  //   try {
+  //     const data = await alumniApi.getAll();
+  //     setAlumni(data);
+  //   } catch (err) {
+  //     console.error("Failed to load alumni:", err);
+  //   }
+  // };
   const loadUsers = async () => {
     try {
       const data = await userApi.getAll();
       setUsers(data);
       if (data.length > 0 && !selectedUserId) {
-        setSelectedUserId(data[0].id);
+        setSelectedUserId(data[0].user_id);
       }
     } catch (err) {
       console.error("Failed to load users:", err);
@@ -46,16 +58,16 @@ function App() {
             <ul className="user-list">
               {users.map((user) => (
                 <li
-                  key={user.id}
-                  className={selectedUserId === user.id ? "active" : ""}
-                  onClick={() => setSelectedUserId(user.id)}
+                  key={user.user_id}
+                  className={selectedUserId === user.user_id ? "active" : ""}
+                  onClick={() => setSelectedUserId(user.user_id)}
                 >
                   <div className="user-avatar">
-                    {user.name.charAt(0).toUpperCase()}
+                    {user.user_id.toString().charAt(0).toUpperCase()}
                   </div>
                   <div className="user-info">
-                    <div className="user-name">{user.name}</div>
-                    <div className="user-email">{user.email}</div>
+                    {/* <div className="user-name">{user.name}</div>
+                    <div className="user-email">{user.email}</div> */}
                   </div>
                 </li>
               ))}

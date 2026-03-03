@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import "reflect-metadata";
 import { initializeDatabase } from "./data/database";
 import userRoutes from "./presentation/routes/user.routes";
-import taskRoutes from "./presentation/routes/task.routes";
 
 // Load environment variables
 dotenv.config();
@@ -26,7 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/users", userRoutes);
-app.use("/api/tasks", taskRoutes);
 
 // Health check
 app.get("/health", (req, res) => {

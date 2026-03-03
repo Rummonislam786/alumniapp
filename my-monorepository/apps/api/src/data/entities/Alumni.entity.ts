@@ -7,6 +7,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  RelationId,
 } from "typeorm";
 import { DepartmentEntity } from "./Departments.entity";
 import { AccountStatus, Gender } from "@monorepo/types";
@@ -58,6 +59,9 @@ export class AlumniEntity {
   @ManyToOne(() => DepartmentEntity, (dept) => dept.alumni)
   @JoinColumn({ name: "dept_id" })
   department!: DepartmentEntity;
+
+  @RelationId((alumni: AlumniEntity) => alumni.department)
+  dept_id!: number;
 
   @Column("int")
   graduation_year!: number;

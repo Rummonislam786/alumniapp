@@ -1,16 +1,17 @@
 import { Request, Response } from "express";
-import { UserService } from "../../business/services/UsersService";
+import { UsersService } from "../../business/services/UsersService";
 import { ApiResponse } from "@monorepo/types";
 
 export class UserController {
-  private userService: UserService;
+  private userService: UsersService;
 
   constructor() {
-    this.userService = new UserService();
+    this.userService = new UsersService();
   }
 
   getAllUsers = async (req: Request, res: Response) => {
     try {
+      console.log("Fetching all users...");
       const users = await this.userService.getAllUsers();
       const response: ApiResponse<typeof users> = {
         success: true,
@@ -55,7 +56,7 @@ export class UserController {
 
   createUser = async (req: Request, res: Response) => {
     try {
-      const user = await this.userService.createUser(req.body);
+      const user = await this.userService.CreateUser(req.body);
       const response: ApiResponse<typeof user> = {
         success: true,
         data: user,

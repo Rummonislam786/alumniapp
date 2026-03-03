@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import { CreateTaskDto } from "@monorepo/types";
-import { taskApi } from "../services/api";
+// import { CreateTaskDto } from "@monorepo/types";
+// import { taskApi } from "../services/api";
 
 interface CreateTaskFormProps {
   userId: number;
   onTaskCreated: () => void;
 }
 
-export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({
-  userId,
-  onTaskCreated,
-}) => {
-  const [formData, setFormData] = useState<Omit<CreateTaskDto, "userId">>({
-    title: "",
-    description: "",
-  });
+export const CreateTaskForm: React.FC<CreateTaskFormProps> = (
+  {
+    // userId,
+    // onTaskCreated,
+  },
+) => {
+  // const [formData, setFormData] = useState<Omit<CreateTaskDto, "userId">>({
+  //   title: "",
+  //   description: "",
+  // });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,18 +25,18 @@ export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({
     setLoading(true);
     setError(null);
 
-    try {
-      await taskApi.create({
-        ...formData,
-        userId,
-      });
-      setFormData({ title: "", description: "" });
-      onTaskCreated();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create task");
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   await taskApi.create({
+    //     // ...formData,
+    //     userId,
+    //   });
+    //   // setFormData({ title: "", description: "" });
+    //   onTaskCreated();
+    // } catch (err) {
+    //   setError(err instanceof Error ? err.message : "Failed to create task");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -47,8 +49,8 @@ export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({
         <input
           id="title"
           type="text"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          // value={formData.title}
+          // onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           required
           placeholder="Enter task title"
         />
@@ -58,10 +60,10 @@ export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({
         <label htmlFor="description">Description</label>
         <textarea
           id="description"
-          value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
+          // value={formData.description}
+          // onChange={(e) =>
+          //   setFormData({ ...formData, description: e.target.value })
+          // }
           required
           placeholder="Enter task description"
           rows={4}

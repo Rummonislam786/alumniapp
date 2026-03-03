@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
   port: parseInt(process.env.DB_PORT || "3306"),
   username: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "monorepo_example",
+  database: process.env.DB_NAME || "alumni_app3",
   entities: [
     AlumniEntity,
     DepartmentEntity,

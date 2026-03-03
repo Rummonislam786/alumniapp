@@ -7,6 +7,7 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  RelationId,
 } from "typeorm";
 import { AlumniEntity } from "./Alumni.entity";
 // @Entity("users")
@@ -45,6 +46,9 @@ export class UserEntity {
   @OneToOne(() => AlumniEntity)
   @JoinColumn({ name: "alumni_id" }) // creates foreign key column
   alumni!: AlumniEntity;
+
+  @RelationId((user: UserEntity) => user.alumni)
+  alumni_id!: number;
 
   @Column("varchar")
   password_hash!: string;

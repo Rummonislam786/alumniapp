@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Task, TaskStatus } from "@monorepo/types";
-import { taskApi } from "../services/api";
+// import { Task, TaskStatus } from "@monorepo/types";
+// import { taskApi } from "../services/api";
 
 interface TaskListProps {
   userId?: number;
 }
 
 export const TaskList: React.FC<TaskListProps> = ({ userId }) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  // const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,8 +18,8 @@ export const TaskList: React.FC<TaskListProps> = ({ userId }) => {
   const loadTasks = async () => {
     try {
       setLoading(true);
-      const data = await taskApi.getAll(userId ? { userId } : undefined);
-      setTasks(data);
+      // const data = await taskApi.getAll(userId ? { userId } : undefined);
+      // setTasks(data);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load tasks");
@@ -28,26 +28,26 @@ export const TaskList: React.FC<TaskListProps> = ({ userId }) => {
     }
   };
 
-  const handleStatusChange = async (taskId: number, status: TaskStatus) => {
-    console.log(`Updating task ${taskId} to status ${status}`);
-    try {
-      await taskApi.update(taskId, { status });
-      loadTasks();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update task");
-    }
-  };
+  // const handleStatusChange = async (taskId: number, status: TaskStatus) => {
+  //   console.log(`Updating task ${taskId} to status ${status}`);
+  //   try {
+  //     await taskApi.update(taskId, { status });
+  //     loadTasks();
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : "Failed to update task");
+  //   }
+  // };
 
-  const handleDelete = async (taskId: number) => {
-    if (!window.confirm("Are you sure you want to delete this task?")) return;
+  // const handleDelete = async (taskId: number) => {
+  //   if (!window.confirm("Are you sure you want to delete this task?")) return;
 
-    try {
-      await taskApi.delete(taskId);
-      loadTasks();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete task");
-    }
-  };
+  //   try {
+  //     await taskApi.delete(taskId);
+  //     loadTasks();
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : "Failed to delete task");
+  //   }
+  // };
 
   if (loading) return <div className="loading">Loading tasks...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -55,7 +55,7 @@ export const TaskList: React.FC<TaskListProps> = ({ userId }) => {
   return (
     <div className="task-list">
       <h2>Tasks</h2>
-      {tasks.length === 0 ? (
+      {/* {tasks.length === 0 ? (
         <p>No tasks found</p>
       ) : (
         <div className="tasks">
@@ -85,7 +85,7 @@ export const TaskList: React.FC<TaskListProps> = ({ userId }) => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

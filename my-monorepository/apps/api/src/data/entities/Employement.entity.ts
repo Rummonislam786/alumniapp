@@ -4,9 +4,11 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  RelationId,
 } from "typeorm";
 import { AlumniEntity } from "./Alumni.entity";
-Entity("employment");
+
+@Entity("employment")
 export class EmploymentEntity {
   @PrimaryGeneratedColumn()
   employment_id!: number;
@@ -14,6 +16,9 @@ export class EmploymentEntity {
   @ManyToOne(() => AlumniEntity, (alumni) => alumni.employment)
   @JoinColumn({ name: "alumni_id" })
   alumni!: AlumniEntity;
+
+  @RelationId((employment: EmploymentEntity) => employment.alumni)
+  alumni_id!: number;
   //   alumni_id: number;
   @Column("varchar")
   company_name!: string;

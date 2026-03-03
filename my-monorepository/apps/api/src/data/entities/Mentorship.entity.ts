@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  RelationId,
 } from "typeorm";
 
 import { AlumniEntity } from "./Alumni.entity";
@@ -17,13 +18,21 @@ export class MentorshipEntity {
   @ManyToOne(() => AlumniEntity, (alumni) => alumni.mentorshipsAsMentor)
   @JoinColumn({ name: "mentor_id" })
   mentor!: AlumniEntity;
+
+  @RelationId((mentorship: MentorshipEntity) => mentorship.mentor)
+  mentor_id!: number;
   //   mentor_id: number;
+
   @Column("varchar")
   mentee_name!: string;
+
   //   mentee_name: string;
   @ManyToOne(() => AlumniEntity, (alumni) => alumni.mentorshipsAsMentee)
   @JoinColumn({ name: "mentee_alumni_id" })
   mentee!: AlumniEntity;
+
+  @RelationId((mentorship: MentorshipEntity) => mentorship.mentee)
+  mentee_alumni_id!: number;
   //   mentee_alumni_id: number;
   @Column("varchar")
   focus_area!: string;

@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  RelationId,
 } from "typeorm";
 import { EventEntity } from "./Events.entity";
 import { AlumniEntity } from "./Alumni.entity";
@@ -16,10 +17,16 @@ export class EventRegEntity {
   @ManyToOne(() => EventEntity, (event) => event.event_id)
   @JoinColumn({ name: "event_id" })
   event!: EventEntity;
+
+  @RelationId((reg: EventRegEntity) => reg.event)
+  event_id!: number;
   //   event_id: number;
   @ManyToOne(() => AlumniEntity, (alumni) => alumni.alumni_id)
   @JoinColumn({ name: "alumni_id" })
   alumni!: AlumniEntity;
+
+  @RelationId((reg: EventRegEntity) => reg.alumni)
+  alumni_id!: number;
   //   alumni_id: number;
   @Column("timestamp")
   registered_at!: Date;

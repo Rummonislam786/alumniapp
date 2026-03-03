@@ -15,6 +15,7 @@ export class UsersRepository {
   //     this.repository = AppDataSource.getRepository(UserEntity);
   //   }
   async findAll(): Promise<UserEntity[]> {
+    console.log("Finding all users in the database...");
     return this.repository.find();
   }
   //   async findAll(): Promise<UserEntity[]> {
