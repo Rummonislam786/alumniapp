@@ -1,4 +1,3 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../database";
 
 import { UserEntity } from "../entities/Users.entity";

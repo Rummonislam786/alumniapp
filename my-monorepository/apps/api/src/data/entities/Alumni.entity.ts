@@ -51,7 +51,7 @@ export class AlumniEntity {
   current_country!: string;
 
   @Column("varchar", { nullable: true })
-  profile_picture_url!: string;
+  profile_photo_url!: string;
 
   @Column("text", { nullable: true })
   bio!: string;

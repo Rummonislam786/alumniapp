@@ -1,31 +1,23 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../database";
 
 import { AlumniEntity } from "../entities/Alumni.entity";
+import { Gender } from "@monorepo/types";
 
 export class AlumniRepository {
   private repository = AppDataSource.getRepository(AlumniEntity);
 
-  // export class UserRepository {
-  //   private repository: Repository<UserEntity>;
   constructor() {
     this.repository = AppDataSource.getRepository(AlumniEntity);
   }
-  //   constructor() {
-  //     this.repository = AppDataSource.getRepository(UserEntity);
-  //   }
+
   async findAll(): Promise<AlumniEntity[]> {
     return this.repository.find();
   }
-  //   async findAll(): Promise<UserEntity[]> {
-  //     return this.repository.find();
-  //   }
+
   async findById(alumni_id: number): Promise<AlumniEntity | null> {
     return this.repository.findOne({ where: { alumni_id } });
   }
-  //   async findById(id: number): Promise<UserEntity | null> {
-  //     return this.repository.findOne({ where: { id } });
-  //   }
+
   async findByStudentId(student_id: string): Promise<AlumniEntity | null> {
     return this.repository.findOneBy({ student_id });
   }
@@ -37,6 +29,7 @@ export class AlumniRepository {
   async findAllbyGraduationYear(year: number): Promise<AlumniEntity[]> {
     return this.repository.find({ where: { graduation_year: year } });
   }
+
   async findAllbyEmploymentSortedByCompany(): Promise<AlumniEntity[]> {
     return this.repository.find({
       relations: ["employment"],
@@ -47,6 +40,11 @@ export class AlumniRepository {
       },
     });
   }
+
+  async findAllbyGender(gender: Gender): Promise<AlumniEntity[]> {
+    return this.repository.find({ where: { gender: gender } });
+  }
+
   async findAllbyEmploymentSortedByIndustry(): Promise<AlumniEntity[]> {
     return this.repository.find({
       relations: ["employment"],
@@ -57,6 +55,7 @@ export class AlumniRepository {
       },
     });
   }
+
   async findAllbyEmploymentSortedByCountry(): Promise<AlumniEntity[]> {
     return this.repository.find({
       relations: ["employment"],
@@ -67,6 +66,7 @@ export class AlumniRepository {
       },
     });
   }
+
   async findAlumnibyEmploymentCountry(
     country: string,
   ): Promise<AlumniEntity[]> {
@@ -79,6 +79,7 @@ export class AlumniRepository {
       },
     });
   }
+
   async findAlumnibyFieldOfStudy(
     field_of_study: string,
   ): Promise<AlumniEntity[]> {
@@ -91,17 +92,12 @@ export class AlumniRepository {
       },
     });
   }
-  //   async findByEmail(email: string): Promise<UserEntity | null> {
-  //     return this.repository.findOne({ where: { email } });
-  //   }
+
   async create(data: Partial<AlumniEntity>): Promise<AlumniEntity> {
     const user = this.repository.create(data);
     return this.repository.save(user);
   }
-  //   async create(data: Partial<UserEntity>): Promise<UserEntity> {
-  //     const user = this.repository.create(data);
-  //     return this.repository.save(user);
-  //   }
+
   async update(
     user_id: number,
     data: Partial<AlumniEntity>,
@@ -110,17 +106,8 @@ export class AlumniRepository {
     return this.findById(user_id);
   }
 
-  //   async update(id: number, data: Partial<UserEntity>): Promise<UserEntity | null> {
-  //     await this.repository.update(id, data);
-  //     return this.findById(id);
-  //   }
   async delete(user_id: number): Promise<boolean> {
     const result = await this.repository.delete(user_id);
     return (result.affected ?? 0) > 0;
   }
-  //   async delete(id: number): Promise<boolean> {
-  //     const result = await this.repository.delete(id);
-  //     return (result.affected ?? 0) > 0;
-  //   }
-  // }
 }
