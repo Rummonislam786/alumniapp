@@ -1,10 +1,6 @@
-// import { Request, Response } from "express";
-// import { UsersService } from "../../business/services/UsersService";
-// import { ApiResponse } from "@monorepo/types";
 import { DepartmentService } from "../../business/services/DepartmentService";
 import { Request, Response } from "express";
 import { ApiResponse } from "@monorepo/types";
-import { create } from "domain";
 
 export class DepartmentController {
   private departmentService: DepartmentService;
