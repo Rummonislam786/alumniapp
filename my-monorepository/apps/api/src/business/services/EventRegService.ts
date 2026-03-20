@@ -20,6 +20,11 @@ export class EventRegService {
       attended: entity.attended,
     };
   }
+  // async getAllEvent(): Promise<events[]> {
+  //   return this.eventRepository
+  //     .findAll()
+  //     .then((entities) => entities.map(this.mapEntityToModel));
+  // }
   async getEventRegByAlumniId(
     alumni_id: number,
   ): Promise<event_registration[]> {

@@ -32,7 +32,7 @@ export class EventService {
       .then((entities) => entities.map(this.mapEntityToModel));
   }
 
-  async getDepartmentById(id: number): Promise<events | null> {
+  async getEventById(id: number): Promise<events | null> {
     const entity = await this.eventRepository.findById(id);
     return entity ? this.mapEntityToModel(entity) : null;
   }
