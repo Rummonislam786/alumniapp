@@ -1,7 +1,3 @@
-// import { Router } from 'express';
-// import { UserController } from '../controllers/UserController';
-// import { body } from 'express-validator';
-// import { validateRequest } from '../middleware/validateRequest';
 import { Router } from "express";
 import { DepartmentController } from "../controllers/DepartmentController";
 import { body } from "express-validator";

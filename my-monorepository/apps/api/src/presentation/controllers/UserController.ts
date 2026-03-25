@@ -29,8 +29,8 @@ export class UserController {
 
   getUserById = async (req: Request, res: Response) => {
     try {
-      const id = parseInt(req.params.id);
-      const user = await this.userService.getUserById(id);
+      const user_id = parseInt(req.params.user_id);
+      const user = await this.userService.getUserById(user_id);
 
       if (!user) {
         const response: ApiResponse<never> = {
@@ -52,6 +52,27 @@ export class UserController {
       };
       res.status(500).json(response);
     }
+  };
+
+  getUserByAlumniId = async (req: Request, res: Response) => {
+    try {
+      const alumni_id = parseInt(req.params.alumni_id);
+      const user = await this.userService.getUserByAlumniId(alumni_id);
+
+      if (!user) {
+        const response: ApiResponse<never> = {
+          success: false,
+          error: "User not found",
+        };
+        return res.status(404).json(response);
+      }
+
+      const response: ApiResponse<typeof user> = {
+        success: true,
+        data: user,
+      };
+      res.json(response);
+    } catch (error) {}
   };
 
   createUser = async (req: Request, res: Response) => {
